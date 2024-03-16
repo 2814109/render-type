@@ -3,17 +3,9 @@ import { Effect, pipe } from "effect";
 import { growUp } from "~/libs/growUp";
 import { reducer } from "~/libs/reducer";
 import { validateUser } from "~/libs/validateUser";
+import { initialState, user } from "~/constants";
 
 export const useCount = () => {
-  const initialState = {
-    count: 0,
-  };
-
-  const user = {
-    name: "hello",
-    age: 17,
-  };
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const program = pipe(user, validateUser, Effect.flatMap(growUp));
