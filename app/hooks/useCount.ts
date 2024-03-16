@@ -7,8 +7,10 @@ import { TRIPLE, initialState, user } from "~/constants";
 
 export const useCount = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const program = pipe(user, validateUser, Effect.flatMap(growUp(TRIPLE)));
+  const program = Effect.succeed(user).pipe(
+    Effect.flatMap(validateUser),
+    Effect.flatMap(growUp(TRIPLE))
+  );
 
   const handleClick = useCallback(() => {
     const result = Effect.match(program, {
