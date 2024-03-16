@@ -6,3 +6,5 @@ export const user = {
   name: "hello",
   age: 17,
 };
+
+export const TRIPLE = 3;

@@ -3,12 +3,12 @@ import { Effect, pipe } from "effect";
 import { growUp } from "~/libs/growUp";
 import { reducer } from "~/libs/reducer";
 import { validateUser } from "~/libs/validateUser";
-import { initialState, user } from "~/constants";
+import { TRIPLE, initialState, user } from "~/constants";
 
 export const useCount = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const program = pipe(user, validateUser, Effect.flatMap(growUp));
+  const program = pipe(user, validateUser, Effect.flatMap(growUp(TRIPLE)));
 
   const handleClick = useCallback(() => {
     const result = Effect.match(program, {
