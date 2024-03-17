@@ -4,7 +4,7 @@ export const initialState = {
 
 export const user = {
   name: "hello",
-  age: 17,
+  age: 20,
 };
 
 export const TRIPLE = 3;
