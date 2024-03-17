@@ -1,4 +1,4 @@
-import { TRIPLE } from "~/constants";
+import { TRIPLE, user } from "~/constants";
 import { useCount } from "~/hooks/useCount";
 
 export default function Index() {
@@ -7,6 +7,7 @@ export default function Index() {
   return (
     <>
       <p>Profile</p>
+      <div>Default : {JSON.stringify(user)}</div>
       <div>{JSON.stringify(state)}</div>
       <div>
         <label htmlFor="user-name">Name</label>
