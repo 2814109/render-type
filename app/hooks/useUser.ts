@@ -1,9 +1,9 @@
 import { useCallback, useReducer } from "react";
 import { Effect as E } from "effect";
-import { TRIPLE, user } from "~/constants";
+import { user } from "~/constants";
 import { userReducer } from "~/libs/userReducer";
 
-export const useUser = () => {
+export const useUser = (multiplication: number) => {
   // state
   const [state, dispatch] = useReducer(userReducer, user);
 
@@ -11,7 +11,7 @@ export const useUser = () => {
   const growUp = useCallback(
     (multiplication: number) => (user: typeof state) =>
       E.succeed(user.age * multiplication),
-    []
+    [multiplication]
   );
 
   const validateUser = useCallback(
@@ -22,7 +22,7 @@ export const useUser = () => {
   // effect
   const program = E.succeed(state).pipe(
     E.flatMap(validateUser),
-    E.flatMap(growUp(TRIPLE))
+    E.flatMap(growUp(multiplication))
   );
 
   // action
@@ -35,7 +35,7 @@ export const useUser = () => {
           onFailure: (error) => window.alert(error),
         })
       ),
-    [state]
+    [state, multiplication]
   );
 
   const handleChangeAge = useCallback(
