@@ -1,8 +1,9 @@
 import { TRIPLE, user } from "~/constants";
-import { useCount } from "~/hooks/useCount";
+import { useUser } from "~/hooks/useUser";
 
 export default function Index() {
-  const { handleClick, handleReset, dispatch, state } = useCount();
+  const { handleClick, handleReset, handleChangeAge, handleChangeName, state } =
+    useUser();
 
   return (
     <>
@@ -11,16 +12,7 @@ export default function Index() {
       <div>{JSON.stringify(state)}</div>
       <div>
         <label htmlFor="user-name">Name</label>
-        <input
-          id="user-name"
-          value={state.name}
-          onChange={(e) =>
-            dispatch({
-              type: "UPDATE_NAME",
-              payload: e.currentTarget.value,
-            })
-          }
-        />
+        <input id="user-name" value={state.name} onChange={handleChangeName} />
       </div>
 
       <div>
@@ -29,12 +21,7 @@ export default function Index() {
           id="user-age"
           value={state.age}
           type="number"
-          onChange={(e) =>
-            dispatch({
-              type: "UPDATE_AGE",
-              payload: Number(e.currentTarget.value),
-            })
-          }
+          onChange={handleChangeAge}
         />
       </div>
 
