@@ -10,7 +10,7 @@ export default function Index() {
       <p>multiplication : {TRIPLE}</p>
       <button onClick={handleClick}>GrowUp</button>
       <button onClick={handleReset}>Reset</button>
-      <p>{state.count}</p>
+      <p>{state.age}</p>
     </>
   );
 }

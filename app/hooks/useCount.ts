@@ -1,12 +1,17 @@
 import { useCallback, useReducer } from "react";
-import { Effect, pipe } from "effect";
-import { growUp } from "~/libs/growUp";
+import { Effect } from "effect";
 import { reducer } from "~/libs/reducer";
-import { validateUser } from "~/libs/validateUser";
-import { TRIPLE, initialState, user } from "~/constants";
+import { TRIPLE, user } from "~/constants";
 
 export const useCount = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, user);
+
+  const growUp = (multiplication: number) => (user: typeof state) =>
+    Effect.succeed(user.age * multiplication);
+
+  const validateUser = (user: typeof state) =>
+    user.age < 18 ? Effect.succeed(user) : Effect.fail("adult");
+
   const program = Effect.succeed(user).pipe(
     Effect.flatMap(validateUser),
     Effect.flatMap(growUp(TRIPLE))
