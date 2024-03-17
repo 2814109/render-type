@@ -22,6 +22,8 @@ export const useUser = (multiplication: number) => {
   // effect
   const program = E.succeed(state).pipe(
     E.flatMap(validateUser),
+    // Using allows us to execute side effects during the computation without altering the result.
+    E.tap(() => console.log("Success")),
     E.flatMap(growUp(multiplication))
   );
 
