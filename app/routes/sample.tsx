@@ -27,6 +27,7 @@ export default function Index() {
         <input
           id="user-age"
           value={state.age}
+          type="number"
           onChange={(e) =>
             dispatch({
               type: "UPDATE_AGE",
