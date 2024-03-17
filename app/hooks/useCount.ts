@@ -17,13 +17,17 @@ export const useCount = () => {
     Effect.flatMap(growUp(TRIPLE))
   );
 
-  const handleClick = useCallback(() => {
-    const result = Effect.match(program, {
-      onSuccess: (success) => dispatch({ type: "SET_COUNT", payload: success }),
-      onFailure: (error) => window.alert(error),
-    });
-    return Effect.runSync(result);
-  }, []);
+  const handleClick = useCallback(
+    () =>
+      Effect.runSync(
+        Effect.match(program, {
+          onSuccess: (success) =>
+            dispatch({ type: "SET_COUNT", payload: success }),
+          onFailure: (error) => window.alert(error),
+        })
+      ),
+    []
+  );
 
   const handleReset = useCallback(() => dispatch({ type: "RESET_COUNT" }), []);
 
