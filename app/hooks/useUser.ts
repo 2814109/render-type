@@ -1,9 +1,38 @@
 import { useCallback, useReducer } from "react";
-import { Effect as E } from "effect";
+import { Effect as E, Option } from "effect";
 import { user } from "~/constants";
 import { userReducer } from "~/libs/userReducer";
+import { User } from "~/types";
 
 export const useUser = (multiplication: number) => {
+  const withEmail: User = {
+    id: 1,
+    username: "john_doe",
+    email: Option.some("john.doe@example.com"),
+  };
+
+  const withoutEmail: User = {
+    id: 2,
+    username: "jane_doe",
+    email: Option.none(),
+  };
+
+  const foo = Option.some(1);
+  const bar = Option.none();
+
+  const result = Option.match(foo, {
+    onNone: () => "Option is empty",
+    onSome: (value) => `Option has a value: ${value}`,
+  });
+
+  const _result = Option.match(bar, {
+    onNone: () => "Option is empty",
+    onSome: (value) => `Option has a value: ${value}`,
+  });
+
+  console.log(result);
+  console.log(_result);
+
   // state
   const [state, dispatch] = useReducer(userReducer, user);
 

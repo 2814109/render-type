@@ -1,7 +1,15 @@
+import { Option } from "effect";
+
 export type TUser = {
   name: string;
   age: number;
 };
+
+export interface User {
+  readonly id: number;
+  readonly username: string;
+  readonly email: Option.Option<string>;
+}
 
 export interface State {
   count: number;
